@@ -1,0 +1,246 @@
+﻿<Window x:Class="StudentManagementSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentManagementSystem"
+        mc:Ignorable="d"
+        Title="Student Management System" x:Name="WindowControl"  SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <TabControl x:Name="MainTabControl" TabStripPlacement="Top">
+        <TabItem Header="DataViewer" x:Name="DataViewerTap" >
+            <Grid x:Name="ViewerDataGrid" Width="900" Height="450">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="300" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Grid.Row="0" Content="Student Data Viewer" FontSize="30" Foreground="#FFE21818"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="44,25,770,16">
+                    <Button Click="Refresh_Button" Content="Refresh" Foreground="#FFE21818" Background="White" Height="20" Width="72" Margin="6 0 0 0" HorizontalContentAlignment="Center" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Height="300" Width="900">
+                    <DataGrid Width="850" Height="250" Margin="25" AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow"
+             HorizontalScrollBarVisibility="Auto" CanUserResizeColumns="False" CanUserResizeRows="False"  VerticalScrollBarVisibility="Auto" SelectionChanged="DataViewerList_SelectionChanges"
+                 x:Name="DataViewerList">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="Id" Header="Id" Width="100" CanUserResize="False" Visibility="Hidden" Binding="{Binding Id}" />
+                            <DataGridTemplateColumn Header="" Width="20" IsReadOnly="True"  DisplayIndex="0">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="Images\edit_image.png"  MouseLeftButtonUp="Edit_Click"  ToolTip="Edit" Width="20" Height="20" 
+                          x:Name="Reverse"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="" Width="20" IsReadOnly="True" DisplayIndex="1">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="Images\delete_image.png" MouseLeftButtonUp="Delete_CLick" ToolTip="Delete" Width="20" Height="20"
+                                  x:Name="Delete"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn x:Name="FirstName" Width="80" Header="First Name" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= FirstName}"/>
+                            <DataGridTextColumn x:Name="LastName" Width="80" Header="Last Name" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= LastName}"/>
+                            <DataGridTextColumn x:Name="Address" Width="80" Header="Address" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= Address}"/>
+                            <DataGridTextColumn x:Name="EmailAddress" Header="Email Address" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= EmailAddress}"/>
+                            <DataGridTextColumn x:Name="DOB" Header="DOB" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= DOB}"/>
+                            <DataGridTextColumn x:Name="FatherName" Width="80" Header="Father Name" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= FatherName}"/>
+                            <DataGridTextColumn x:Name="MotherName" Header="Mother Name" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path=MotherName}"/>
+                            <DataGridTextColumn x:Name="Occupation" Header="Occupation" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= Occupation}"/>
+                            <DataGridTextColumn x:Name="PhoneNumber"  Width="100" Header="Phone Number" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path=PhoneNumber}"/>
+                            <DataGridTextColumn x:Name="Course" Header="Course" Width="80"  CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path=Course}"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+
+
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Student" x:Name="StudentTab"  >
+            <Grid x:Name="StudentGrid" Height="450" Width="900" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center">
+                    <Label x:Name="StudentAdderLabel" Content="Student Adder" FontSize="30" Foreground="#FFE21818" BorderBrush="#FFA25454"  />
+                </StackPanel>
+                <Border  Grid.Row="1" BorderThickness="5" CornerRadius="10" Margin="22">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="Aqua" Offset="0.0" />
+                            <GradientStop Color="Aqua" Offset="1.1" />
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                                <GradientStop Color="#FFE21818" Offset="0.3" />
+                                <GradientStop Color="#fbc" Offset="0.6" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Border>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Height="37" Margin="39,34,35,0" >
+                    <Label Content="First Name:" FontSize="20" Foreground="White" Margin="10 0 0 0" />
+                    <Label Content="Last Name:" FontSize="20" Foreground="White" Margin="70 0 0 0" />
+                    <Label Content="Address :" FontSize="20" Foreground="White" Margin="70 0 0 0" />
+                    <Label Content="Email Address:" FontSize="20" Foreground="White" Margin="60 0 0 0" />
+                    <Label Content=" DOB:" FontSize="20" Foreground="White" Margin="70 0 0 0" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Width="830" Margin="0,67,0,96" >
+                    <TextBox x:Name="FirstName_Textbox"  Width="140" Height="30" Margin="5 0 0 0 " PreviewTextInput="Name_Validation" FontSize="18 " KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="SecondName_Textbox" Width="142" Height="30" Margin="30 0 0 0" PreviewTextInput="Name_Validation" FontSize="18" KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Address_Textbox"  Width="142" Height="30" Margin="30 0 0 0"  PreviewTextInput="Address_Validation" FontSize="18" KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Email_TextBox" Width="142" Height="30" Margin="30 0 0 0" PreviewTextInput="EmailTextBox_Validation" KeyDown="TextBox_KeyDown" LostFocus="EmailTextBox_LostFocus" FontSize="18" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="DOB_TextBox" Width="142" Height="30" Margin="25 0 0 0" LostFocus="DOBTextBox_Lostfocus" KeyDown="TextBox_KeyDown" FontSize="18" VerticalContentAlignment="Center"/>
+
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="  1" Orientation="Horizontal" VerticalAlignment="Top" Height="43" Margin="37,92,33,0" >
+                    <Label Height="40" Width="140" Content="Father Name:" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0 0 0 0" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="150" Content="Mother Name:" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="40 0 0 0" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="140" Content="Occupation:"  Margin="35 0 0 0"  VerticalContentAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="150" Content="Phone Number:"  Margin="10 0 0 0"  VerticalContentAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="150" Content="Courses:"  Margin="50 0 0 0"  VerticalContentAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="37,121,33,0" VerticalAlignment="Top" Height="48">
+                    <TextBox x:Name="FatherName_Textbox"  Width="142" Height="30" Margin="5 0 0 0" PreviewTextInput="Name_Validation" FontSize="18 " KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="MotherName_Textbox"  Width="142" Height="30" Margin="30 0 0 0"  PreviewTextInput="Name_Validation" FontSize="18" KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Occupation_Textbox"  Width="142" Height="30" Margin="30 0 0 0"  PreviewTextInput="Name_Validation" FontSize="18" KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="PhoneNumber_TextBox" Width="142" Height="30" Margin="30 0 0 0" PreviewTextInput="PhoneNumber_Validation" KeyDown="TextBox_KeyDown" FontSize="18" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Courses_TextBox" Width="135" Height="30" Margin="25  0 0 0"  LostFocus="Course_LostFocus" PreviewTextInput="Course_Validation" KeyDown="TextBox_KeyDown" FontSize="18" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                    <Button x:Name="AddButton" Content="Add" Width="70" Height="40" FontSize=" 20" Margin="0,0,10,0" Click="AddOrUpdate_Button" Foreground="White">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#FFE21818" Offset="0"/>
+                                <GradientStop Color="#FFE21818" Offset="0.5" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="CancelButton" Content="Cancel" Width="70" Height="40" FontSize=" 20" Click="Cancel_Button" Foreground="White">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#FFE21818" Offset="0"/>
+                                <GradientStop Color="#FFE21818" Offset="0.5" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="CourseTab" Header="Courses">
+            <Grid x:Name="CoursesTapGrid" Width="900" Height="450" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"  />
+                    <RowDefinition Height="160"/>
+
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label Content="Courses Adder" FontSize="30" Foreground="#FFE21818" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center"    Orientation="Horizontal">
+                    <Border Grid.Row="1" CornerRadius="10" BorderThickness="8" Margin="0 0,0, 50" Height="102" Width="800">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" >
+                                <GradientStop Color="#fbc2eb" Offset="1.0"/>
+                                <GradientStop Color="#fbc2eb" Offset=" 1.5"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Rectangle Grid.Row="1" Margin="0,0,0,0"  >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint=" 0,0" EndPoint="1,0">
+                                    <GradientStop Color="#ff7e5f" Offset="0.7" />
+                                    <GradientStop Color="#512da8" Offset="0.0" />
+                                    <GradientStop Color="#512da8" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </Border>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal"  VerticalAlignment="Top" Height="53" Margin="68,0,59,0"  >
+                    <Label Height="40" Width="110" Content="Course Id: "   VerticalContentAlignment="Center"  Margin="0 0 0 0" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="138" Content="Course Name:"  VerticalContentAlignment="Center" Margin="55 0 0 0" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="116" Content="Credits:" HorizontalContentAlignment="Center" Margin="30 0 0 0" VerticalAlignment="Bottom" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="107" VerticalContentAlignment="Center" Content="Instructor: " Margin="50 0 0 0" VerticalAlignment="Bottom" Foreground="White" FontSize="20"/>
+                    <Label Height="40" Width="101" HorizontalContentAlignment="Center"  Foreground="White"  Margin="45 0 0 0" Content="Duration:" FontSize="20" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Width="780" Margin="0,36,0,65" >
+                    <TextBox x:Name="CourseId_Textbox"  Width="130"  Height="30" Margin="4 0 0 0" PreviewTextInput="PhoneNumber_Validation" FontSize="18 " KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="CourseName_Textbox" Width="130" Height="30" Margin="30 0 0 0" PreviewTextInput="Name_Validation" FontSize="18" KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Credits_Textbox"  Width="130" Height="30" Margin="30 0 0 0"  PreviewTextInput="Address_Validation" FontSize="18" KeyDown="TextBox_KeyDown" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Instructors_TextBox" Width="130" Height="30" Margin="30 0 0 0" PreviewTextInput="EmailTextBox_Validation" KeyDown="TextBox_KeyDown" LostFocus="EmailTextBox_LostFocus" FontSize="18" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="Duration_TextBox" Width="130" Height="30" Margin="30 0 0 0" KeyDown="TextBox_KeyDown" FontSize="18" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,103,0,6">
+                    <Button Content="Add" Width="70" Height="40" FontSize=" 20" Margin="0,0,50,0" Click="AddCourse_Button" Foreground="White">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#a18cd1" Offset="0"/>
+                                <GradientStop Color="#a18cd1" Offset="0.5" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Content="Cancel" Width="70" Height="40" FontSize=" 20" Click="CancelCourse_Button" Foreground="White">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#a18cd1" Offset="0"/>
+                                <GradientStop Color="#a18cd1" Offset="0.5" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Height="180" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <DataGrid Width="500"  Height="155" Margin="0" AutoGenerateColumns="False" CanUserAddRows="False" SelectionUnit="FullRow"
+               HorizontalScrollBarVisibility="Auto"  CanUserResizeColumns="False" CanUserResizeRows="False"  VerticalScrollBarVisibility="Auto" SelectionChanged="CourseViewerList_SelectionChanges"
+              x:Name="CourseDataViewerList">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="CId" Header="Id" Width="100" CanUserResize="False" Visibility="Hidden" Binding="{Binding Id}" />
+                            <DataGridTemplateColumn Header="" Width="20" IsReadOnly="True"  DisplayIndex="0">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="Images\edit_image.png"  MouseLeftButtonUp="CourseEdit_Click"  ToolTip="Edit" Width="20" Height="20" 
+             x:Name="Reverse"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="" Width="20" IsReadOnly="True" DisplayIndex="1">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="Images\delete_image.png" MouseLeftButtonUp="CourseDelete_CLick" ToolTip="Delete" Width="20" Height="20"
+                     x:Name="Delete"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn x:Name="CourseId" Width="80" Header="Course Id" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= CourseId}"/>
+                            <DataGridTextColumn x:Name="CourseName" Width="110" Header="Course Name" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= Name}"/>
+                            <DataGridTextColumn x:Name="Credits" Width="80" Header="Credits" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= Credits}"/>
+                            <DataGridTextColumn x:Name="Instructor" Header="Instructor" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= Instructor}"/>
+                            <DataGridTextColumn x:Name="Duration" Header="Duration" CanUserSort="False" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" Binding="{Binding Path= Duration}"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+
+        </TabItem>
+
+    </TabControl>
+
+</Window>
