@@ -1,23 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace StudentManagementSystem
 {
@@ -118,7 +107,7 @@ namespace StudentManagementSystem
             }
             catch (Exception ex)
             {
-               // MessageBox.Show(ex.ToString());
+                // MessageBox.Show(ex.ToString());
             }
         }
 
@@ -172,7 +161,7 @@ namespace StudentManagementSystem
                     var row = (DataRowView)((FrameworkElement)sender).DataContext;
                     FirstName_Textbox.Text = row["FirstName"].ToString();
                     SecondName_Textbox.Text = row["LastName"].ToString();
-                   Address_Textbox.Text = row["Address"].ToString();
+                    Address_Textbox.Text = row["Address"].ToString();
                     Email_TextBox.Text = row["EmailAddress"].ToString();
                     DOB_TextBox.Text = row["DOB"].ToString();
                     FatherName_Textbox.Text = row["FatherName"].ToString();
@@ -219,7 +208,7 @@ namespace StudentManagementSystem
         private void Cancel_Button(object sender, RoutedEventArgs e)
         {
             ClearData();
-            if(AddButton.Content.ToString()=="Update")
+            if (AddButton.Content.ToString() == "Update")
             {
                 MainTabControl.SelectedIndex = 0;
                 AddButton.Content = "Add";
@@ -238,7 +227,7 @@ namespace StudentManagementSystem
                         MessageBox.Show("Please enter the first name.");
                         return;
                     }
-                   else if (string.IsNullOrWhiteSpace(SecondName_Textbox.Text))
+                    else if (string.IsNullOrWhiteSpace(SecondName_Textbox.Text))
                     {
                         MessageBox.Show("Please enter the second name.");
                         return;
@@ -258,7 +247,7 @@ namespace StudentManagementSystem
                         MessageBox.Show("Please enter the Father name.");
                         return;
                     }
-                   else if (string.IsNullOrWhiteSpace(MotherName_Textbox.Text))
+                    else if (string.IsNullOrWhiteSpace(MotherName_Textbox.Text))
                     {
                         MessageBox.Show("Please enter the Mother name.");
                         return;
@@ -291,7 +280,7 @@ namespace StudentManagementSystem
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Contact Save Successfully", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                          }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -301,12 +290,12 @@ namespace StudentManagementSystem
                 finally
                 {
                     connection.Close();
-                     ClearData();
+                    ClearData();
                     GetStudentData();
                 }
             }
             //when you press edit button this event will be in action as add ==Update
-            else if(AddButton.Content.ToString()=="Update") 
+            else if (AddButton.Content.ToString() == "Update")
             {
                 UpdateStudent(selectedStudentId);
                 MainTabControl.SelectedIndex = 0;
@@ -315,7 +304,7 @@ namespace StudentManagementSystem
                 GetStudentData();
                 StudentAdderLabel.Content = "Student Adder";
             }
-            
+
         }
         private void UpdateStudent(int StudentId)
         {
@@ -337,7 +326,7 @@ namespace StudentManagementSystem
                 cmd.Parameters.AddWithValue("@Occupation", Occupation_Textbox.Text);
                 cmd.Parameters.AddWithValue("@PhoneNumber", int.Parse(PhoneNumber_TextBox.Text));
                 cmd.Parameters.AddWithValue("@Courses", Courses_TextBox.Text);
-                cmd.Parameters.AddWithValue("@StudentId",StudentId);
+                cmd.Parameters.AddWithValue("@StudentId", StudentId);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Data Update Sucessfully ", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -348,7 +337,7 @@ namespace StudentManagementSystem
             }
             finally
             {
-              
+
                 connection.Close();
             }
         }
@@ -481,7 +470,7 @@ namespace StudentManagementSystem
         #endregion
         #endregion
         #region Course Tap
-      
+
         private void ClearCourseData()
         {
             CourseId_Textbox.Text = string.Empty;
@@ -498,7 +487,7 @@ namespace StudentManagementSystem
             {
                 mycon();
                 string query = "Select * from Courses";
-                cmd = new SqlCommand(query,connection);
+                cmd = new SqlCommand(query, connection);
                 DataTable coursedatatable = new DataTable();
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(coursedatatable);
